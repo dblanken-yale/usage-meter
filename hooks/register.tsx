@@ -73,7 +73,8 @@ export const register: Register = on => {
     const ctxK = u.context.tokens ? `${Math.round(u.context.tokens / 1000)}k/${Math.round(u.context.window / 1000)}k` : ''
 
     return (
-      <Box flexDirection="column">
+      // A little space under the band above (cache-buster); on the terminal a step is a whole blank row, so skip it there.
+      <Box flexDirection="column" paddingTop={e.surface === 'terminal' ? 0 : 1}>
         <Box>
           <Text color={colorFor(ctxPct)}>● </Text>
           {meter('ctx', 'ctx', ctxPct, ctxK)}
