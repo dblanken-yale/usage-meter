@@ -1,0 +1,6 @@
+{
+  "name": "usage-meter",
+  "version": "0.1.0",
+  "description": "Band above the prompt showing context window fill, rate-limit windows, and session cost.",
+  "types": "./types/index.d.ts"
+}
