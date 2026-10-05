@@ -2,24 +2,22 @@
 
 A Claude Code mod that keeps your context window, usage limits, and session cost visible in a row above the prompt, so you don't have to open the usage popup to check them.
 
-```
-● ctx 42% 84k/200k  │  5h 2% 8:10 PM  │  7d 10% Sat 3:00 AM  │  $1.23
-```
+![usage-meter above the prompt in Claude Code Desktop](docs/screenshot.png)
 
 ## What it shows
 
-| Piece | Means |
+| Section | Means |
 | --- | --- |
-| `ctx` | How full the context window is, with tokens used out of the window size |
-| `5h` | Your 5-hour session limit, and when it resets |
-| `7d` | Your weekly limit, and when it resets |
+| `ctx` | How full the context window is, then tokens used out of the window size |
+| `5h` | How much of your 5-hour limit you've used, then when it resets |
+| `7d` | How much of your weekly limit you've used, then when it resets |
 | `$` | What this session has cost so far |
 
-These are the same figures the status line and the usage popup read. A reset within the next 20 hours shows the time only; a later one shows the weekday too.
+These are the same figures the status line and the usage popup show.
 
-Each percentage is green, turns yellow at 70%, and red at 90%.
-
-The limit sections only appear on a Claude subscription, after the first reply reports them. Any other limit window Claude Code reports (a gateway spend limit, for example) gets a section of its own, labeled with its raw name.
+- **Colors:** each percentage is green, turns yellow at 70%, and red at 90%. The dot at the start follows the context percentage.
+- **Reset times** are in your local time. A reset within the next 20 hours shows the time only; a later one adds the weekday.
+- **Limits** only show on a Claude subscription, after the first reply reports them. Any other limit Claude Code reports (a gateway spend limit, for example) gets its own section, labeled with its raw name.
 
 ## Install
 
@@ -59,7 +57,6 @@ Terminal sessions reload the mod when its files change. Desktop app sessions pic
 
 ## Notes
 
-- It shares the row above the prompt with other mods. It calls `next(e)` and stacks whatever the mods beneath drew under its own row. A mod above it that returns only its own row hides it; [cache-buster](https://github.com/dblanken-yale/cache-buster) stacks the same way, so the two show together.
-- Reset times are formatted in the mod's own runtime. If they come out in UTC instead of your local time, that runtime doesn't know your time zone.
+- It shares the row above the prompt with other mods. It calls `next(e)` and stacks whatever the mods beneath drew under its own row. A mod above it that returns only its own row hides it; [cache-buster](https://github.com/dblanken-yale/cache-buster) stacks the same way, so the two show together. In the desktop app there's a little space between the rows; the terminal gets none, since one step of padding there is a whole blank line.
 - To check it after editing: `claude plugin validate ~/.claude/mods/usage-meter` and `claude plugin test ~/.claude/mods/usage-meter`.
 - `tsconfig.json` points at `.claude-plugin/types/`, which Claude Code generates and git ignores, so type-checking a fresh clone needs those files regenerated first.
