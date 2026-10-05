@@ -3,7 +3,6 @@ import type { Register } from 'claude-code'
 
 import type { Limit, Snapshot } from '../types'
 
-const CELLS = 10
 const LABELS: Record<string, string> = { five_hour: '5h', seven_day: '7d', spend_limit: 'spend' }
 
 const usage = atom({ plugin: 'usage-meter', key: 'usage' } as const, null)
@@ -52,18 +51,10 @@ export const register: Register = on => {
 
     const meter = (key: string, label: string, pct: number, suffix = '') => {
       const color = colorFor(pct)
-      const filled = Math.round((Math.min(pct, 100) / 100) * CELLS)
       return (
         <Box key={key}>
           <Text bold>{label} </Text>
-          <Text color={color}>{Math.round(pct)}% </Text>
-          <Box gap={1}>
-            {Array.from({ length: CELLS }, (_, i) => (
-              <Text key={`${key}${i}`} backgroundColor={i < filled ? color : 'gray'}>
-                {' '}
-              </Text>
-            ))}
-          </Box>
+          <Text color={color}>{Math.round(pct)}%</Text>
           {suffix ? <Text dimColor> {suffix}</Text> : null}
         </Box>
       )

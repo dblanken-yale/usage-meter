@@ -3,7 +3,7 @@
 A Claude Code mod that keeps your context window, usage limits, and session cost visible in a row above the prompt, so you don't have to open the usage popup to check them.
 
 ```
-● ctx 42% ▮▮▮▮▯▯▯▯▯▯ 84k/200k  │  5h 2% ▯▯▯▯▯▯▯▯▯▯ 8:10 PM  │  7d 10% ▮▯▯▯▯▯▯▯▯▯ Sat 3:00 AM  │  $1.23
+● ctx 42% 84k/200k  │  5h 2% 8:10 PM  │  7d 10% Sat 3:00 AM  │  $1.23
 ```
 
 ## What it shows
@@ -17,9 +17,9 @@ A Claude Code mod that keeps your context window, usage limits, and session cost
 
 These are the same figures the status line and the usage popup read. A reset within the next 20 hours shows the time only; a later one shows the weekday too.
 
-Each bar fills green, turns yellow at 70%, and red at 90%.
+Each percentage is green, turns yellow at 70%, and red at 90%.
 
-The limit meters only appear on a Claude subscription, after the first reply reports them. Any other limit window Claude Code reports (a gateway spend limit, for example) gets a meter of its own, labeled with its raw name.
+The limit sections only appear on a Claude subscription, after the first reply reports them. Any other limit window Claude Code reports (a gateway spend limit, for example) gets a section of its own, labeled with its raw name.
 
 ## Install
 
