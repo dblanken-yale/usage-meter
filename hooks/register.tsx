@@ -57,11 +57,13 @@ export const register: Register = on => {
         <Box key={key}>
           <Text dimColor>{label} </Text>
           <Text color={color}>{Math.round(pct)}% </Text>
-          {Array.from({ length: CELLS }, (_, i) => (
-            <Text key={`${key}${i}`} backgroundColor={i < filled ? color : 'gray'}>
-              {' '}
-            </Text>
-          ))}
+          <Box gap={1}>
+            {Array.from({ length: CELLS }, (_, i) => (
+              <Text key={`${key}${i}`} backgroundColor={i < filled ? color : 'gray'}>
+                {' '}
+              </Text>
+            ))}
+          </Box>
           <Text dimColor>{suffix ? ` ${suffix}` : ''}   </Text>
         </Box>
       )
