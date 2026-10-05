@@ -3,7 +3,7 @@
 A Claude Code mod that keeps your context window, usage limits, and session cost visible in a row above the prompt, so you don't have to open the usage popup to check them.
 
 ```
-● ctx 42% ▮▮▮▮▯▯▯▯▯▯ 84k/200k   5h 2% ▯▯▯▯▯▯▯▯▯▯ 8:10 PM   7d 10% ▮▯▯▯▯▯▯▯▯▯ Sat 3:00 AM   $1.23
+● ctx 42% ▮▮▮▮▯▯▯▯▯▯ 84k/200k  │  5h 2% ▯▯▯▯▯▯▯▯▯▯ 8:10 PM  │  7d 10% ▮▯▯▯▯▯▯▯▯▯ Sat 3:00 AM  │  $1.23
 ```
 
 ## What it shows

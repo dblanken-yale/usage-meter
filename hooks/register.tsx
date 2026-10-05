@@ -55,7 +55,7 @@ export const register: Register = on => {
       const filled = Math.round((Math.min(pct, 100) / 100) * CELLS)
       return (
         <Box key={key}>
-          <Text dimColor>{label} </Text>
+          <Text bold>{label} </Text>
           <Text color={color}>{Math.round(pct)}% </Text>
           <Box gap={1}>
             {Array.from({ length: CELLS }, (_, i) => (
@@ -64,7 +64,7 @@ export const register: Register = on => {
               </Text>
             ))}
           </Box>
-          <Text dimColor>{suffix ? ` ${suffix}` : ''}   </Text>
+          {suffix ? <Text dimColor> {suffix}</Text> : null}
         </Box>
       )
     }
@@ -72,14 +72,18 @@ export const register: Register = on => {
     const ctxPct = u.context.percent ?? 0
     const ctxK = u.context.tokens ? `${Math.round(u.context.tokens / 1000)}k/${Math.round(u.context.window / 1000)}k` : ''
 
+    const sections = [
+      meter('ctx', 'ctx', ctxPct, ctxK),
+      ...u.rateLimits.map(l => meter(l.kind, LABELS[l.kind] ?? l.kind, l.percentUsed, resetAt(l, t))),
+      ...(u.cost ? [<Text key="cost" bold>${u.cost.usd.toFixed(2)}</Text>] : []),
+    ]
+
     return (
       // A little space under the band above (cache-buster); on the terminal a step is a whole blank row, so skip it there.
       <Box flexDirection="column" paddingTop={e.surface === 'terminal' ? 0 : 1}>
         <Box>
           <Text color={colorFor(ctxPct)}>● </Text>
-          {meter('ctx', 'ctx', ctxPct, ctxK)}
-          {u.rateLimits.map(l => meter(l.kind, LABELS[l.kind] ?? l.kind, l.percentUsed, resetAt(l, t)))}
-          {u.cost ? <Text dimColor>${u.cost.usd.toFixed(2)}</Text> : null}
+          {sections.flatMap((section, i) => (i ? [<Text key={`sep${i}`} dimColor>{'  │  '}</Text>, section] : [section]))}
         </Box>
         {below}
       </Box>
