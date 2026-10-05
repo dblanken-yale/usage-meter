@@ -61,5 +61,5 @@ Terminal sessions reload the mod when its files change. Desktop app sessions pic
 
 - It shares the row above the prompt with other mods. It calls `next(e)` and stacks whatever the mods beneath drew under its own row. A mod above it that returns only its own row hides it; [cache-buster](https://github.com/dblanken-yale/cache-buster) stacks the same way, so the two show together.
 - Reset times are formatted in the mod's own runtime. If they come out in UTC instead of your local time, that runtime doesn't know your time zone.
-- To check it after editing: `claude plugin validate ~/.claude/mods/usage-meter`.
+- To check it after editing: `claude plugin validate ~/.claude/mods/usage-meter` and `claude plugin test ~/.claude/mods/usage-meter`.
 - `tsconfig.json` points at `.claude-plugin/types/`, which Claude Code generates and git ignores, so type-checking a fresh clone needs those files regenerated first.
