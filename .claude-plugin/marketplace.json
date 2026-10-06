@@ -1,0 +1,12 @@
+{
+  "name": "usage-meter",
+  "owner": { "name": "David Blankenship" },
+  "metadata": { "description": "Context, rate-limit and cost band for Claude Code" },
+  "plugins": [
+    {
+      "name": "usage-meter",
+      "description": "Band above the prompt showing context window fill, rate-limit windows, and session cost.",
+      "source": "./"
+    }
+  ]
+}

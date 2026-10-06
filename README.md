@@ -21,42 +21,53 @@ These are the same figures the status line and the usage popup show.
 
 ## Install
 
-1. Clone the repo into your mods folder:
+Run these in Claude Code:
 
-   ```bash
-   git clone git@github.com:dblanken-yale/usage-meter.git ~/.claude/mods/usage-meter
-   ```
+```
+/plugin marketplace add dblanken-yale/usage-meter
+/plugin install usage-meter@usage-meter
+```
 
-2. Add the folder to `CLAUDE_CODE_PLUGIN_DIRS` in the `env` block of `~/.claude/settings.json`:
-
-   ```json
-   {
-     "env": {
-       "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/usage-meter"
-     }
-   }
-   ```
-
-   If the variable already lists other folders, add this one with a `:` between them, for example `"~/.claude/mods/cache-buster:~/.claude/mods/usage-meter"`.
-
-3. Start a new Claude Code session, in the terminal or the desktop app.
-
-To try it in one terminal session without changing settings:
+Or from a terminal:
 
 ```bash
-claude --plugin-dir ~/.claude/mods/usage-meter
+claude plugin marketplace add dblanken-yale/usage-meter
 ```
+
+```bash
+claude plugin install usage-meter@usage-meter
+```
+
+Start a new Claude Code session, in the terminal or the desktop app.
 
 ## Update
 
+Turn on auto-update for the `usage-meter` marketplace in `/plugin` (Marketplaces tab), and new versions install when Claude Code starts. To update by hand:
+
 ```bash
-git -C ~/.claude/mods/usage-meter pull
+claude plugin marketplace update usage-meter
 ```
 
-Terminal sessions reload the mod when its files change. Desktop app sessions pick it up when you start a new one.
+Desktop app sessions pick up the new version when you start a new one.
+
+## Develop
+
+Clone the repo and load it from the folder, so edits reload as you save:
+
+```bash
+git clone git@github.com:dblanken-yale/usage-meter.git ~/code/usage-meter
+```
+
+```bash
+claude --plugin-dir ~/code/usage-meter
+```
+
+Disable the marketplace install while you do this, or it loads twice.
+
+Bump `version` in `.claude-plugin/plugin.json` with every release. Installed copies only update when the version changes.
 
 ## Notes
 
 - It shares the row above the prompt with other mods. It calls `next(e)` and stacks whatever the mods beneath drew under its own row. A mod above it that returns only its own row hides it; [cache-buster](https://github.com/dblanken-yale/cache-buster) stacks the same way, so the two show together. In the desktop app there's a little space between the rows; the terminal gets none, since one step of padding there is a whole blank line.
-- To check it after editing: `claude plugin validate ~/.claude/mods/usage-meter` and `claude plugin test ~/.claude/mods/usage-meter`.
+- To check it after editing: `claude plugin validate ~/code/usage-meter` and `claude plugin test ~/code/usage-meter`.
 - `tsconfig.json` points at `.claude-plugin/types/`, which Claude Code generates and git ignores, so type-checking a fresh clone needs those files regenerated first.
